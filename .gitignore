@@ -21,6 +21,17 @@
 *.exe
 *.out
 *.app
-Smith.cbp
-Smith.depend
-Smith.layout
+# Codeblocks project files
+*.cbp
+*.depend
+*.layout
+# VS project / solution files
+*.opensdf
+*.sdf
+*.sln
+*.suo
+*.vcxproj
+*.vcxproj.filters
+# Windows libs
+*.lib
+*.dll
