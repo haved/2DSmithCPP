@@ -12,8 +12,8 @@ Engine::Engine(int canvas_width, int canvas_height)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    c_width = canvas_width;
-    c_height = canvas_height;
+    c_width = (float)canvas_width;
+    c_height = (float)canvas_height;
 
     std::string title = "Smith";
     display = new Display(canvas_width, canvas_height, title.c_str());

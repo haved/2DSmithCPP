@@ -1,6 +1,6 @@
 #include "Time.h"
 
-#define MAX_DELTA 0.1f
+#define MAX_DELTA 0.03f
 
 static float delta = 0;
 

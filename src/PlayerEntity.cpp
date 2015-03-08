@@ -40,8 +40,6 @@ void PlayerEntity::Update(Scene* s)
     accel.Normalize();
     accel.Multiply(SPEED*Time::getDelta());
 
-    std::cout << Time::getDelta() << std::endl;
-
     speed.Add(accel);
 
     if(!speed.IsNull())
@@ -51,6 +49,9 @@ void PlayerEntity::Update(Scene* s)
         speed.Normalize();
         speed.Multiply(l);
     }
+
+	std::cout << Time::getDelta() << std::endl;
+	std::cout << "Speed after friction: " << speed.x << std::endl;
 
     x+=speed.x;
     y+=speed.y;
