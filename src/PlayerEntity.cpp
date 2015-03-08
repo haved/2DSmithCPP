@@ -1,11 +1,12 @@
 #include "PlayerEntity.h"
 #include "Engine.h"
 #include "Time.h"
+#include "RenderHelper.h"
 #include <iostream>
 #include <GL/gl.h>
 
 #define SPEED 300
-#define FRICTION 40
+#define FRICTION 20
 
 PlayerEntity::PlayerEntity(float x, float y, float left, float right, float up, float down)
 {
@@ -37,12 +38,14 @@ void PlayerEntity::Update(Scene* s)
     if(Input::isDownKeyDown())
         accel.y+=1;
 
-    accel.Normalize();
-    accel.Multiply(SPEED*Time::getDelta());
+    if(!accel.IsNull())
+    {
+        accel.Normalize();
+        accel.Multiply(SPEED*Time::getDelta());
 
-    speed.Add(accel);
-
-    if(!speed.IsNull())
+        speed.xy(accel.x, accel.y);
+    }
+    else if(!speed.IsNull())
     {
         float l = speed.GetLength();
         l -= l * FRICTION * Time::getDelta();
@@ -50,15 +53,13 @@ void PlayerEntity::Update(Scene* s)
         speed.Multiply(l);
     }
 
-	std::cout << Time::getDelta() << std::endl;
-	std::cout << "Speed after friction: " << speed.x << std::endl;
-
     x+=speed.x;
     y+=speed.y;
 }
 
 void PlayerEntity::Render(Scene* s)
 {
+    RenderHelper::DisableTextures();
     glBegin(GL_TRIANGLES);
     glColor3f(1, 0.3f, 0.6f);
     glVertex2f(x, y-up);

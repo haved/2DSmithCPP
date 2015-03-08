@@ -1,6 +1,5 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-
 #include "Vector2f.h"
 
 class Scene;

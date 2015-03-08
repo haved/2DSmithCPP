@@ -33,5 +33,7 @@
 *.vcxproj
 *.vcxproj.filters
 # Windows libs
-*.lib
 *.dll
+#Library folders
+lib/
+lib_include/
