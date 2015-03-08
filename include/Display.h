@@ -1,5 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
+#ifdef _WIN32
+#include <windows.h>
+#endif //_WIN32
 #include <SDL2/SDL.h>
 
 class Display
