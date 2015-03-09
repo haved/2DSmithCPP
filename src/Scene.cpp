@@ -43,3 +43,18 @@ void Scene::AddEntity(std::shared_ptr<Entity> e)
 {
     entityList.push_back(e);
 }
+
+std::vector<std::shared_ptr<Entity>>* Scene::GetEntityList()
+{
+    return &entityList;
+}
+
+int Scene::GetEntityAmount()
+{
+    return entityList.size();
+}
+
+Entity* Scene::GetEntityAt(int index)
+{
+    return entityList.at(index).get();
+}

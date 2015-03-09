@@ -13,9 +13,11 @@ class Scene
         Scene();
         virtual ~Scene();
         void AddEntity(std::shared_ptr<Entity> e);
-        void RemoveEntity(std::shared_ptr<Entity> e);
         void Update();
         void Render();
+        std::vector<std::shared_ptr<Entity>>* GetEntityList();
+        int GetEntityAmount();
+        Entity* GetEntityAt(int index);
         std::string GetState() const {return state;};
     protected:
     private:
