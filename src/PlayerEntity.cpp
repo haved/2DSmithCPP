@@ -53,7 +53,7 @@ void PlayerEntity::Update(Scene* s)
         speed.Multiply(l);
     }
 
-    MoveAsGhost();
+    MoveAsSolid(s);
 }
 
 void PlayerEntity::Render(Scene* s)
