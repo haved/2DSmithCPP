@@ -5,8 +5,8 @@
 #include <iostream>
 #include <GL/gl.h>
 
-#define SPEED 300
-#define FRICTION 20
+#define SPEED 800
+#define FRICTION 8
 
 PlayerEntity::PlayerEntity(float x, float y, float left, float right, float up, float down)
 {
@@ -41,11 +41,12 @@ void PlayerEntity::Update(Scene* s)
     if(!accel.IsNull())
     {
         accel.Normalize();
-        accel.Multiply(SPEED);
+        accel.Multiply(SPEED*Time::getDelta());
 
-        speed.xy(accel.x, accel.y);
+        speed.Add(accel);
     }
-    else if(!speed.IsNull())
+
+    if(!speed.IsNull())
     {
         float l = speed.GetLength();
         l -= l * FRICTION * Time::getDelta();
