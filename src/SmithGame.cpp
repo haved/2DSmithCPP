@@ -1,5 +1,4 @@
 #include "SmithGame.h"
-#include "Resources.h"
 #include "PlayerEntity.h"
 #include "InteractiveEntity.h"
 #include "ImageEntity.h"

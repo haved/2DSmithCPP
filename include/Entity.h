@@ -11,8 +11,9 @@ class Entity
         virtual ~Entity();
         virtual void Update(Scene* s);
         virtual void Render(Scene* s);
+        void MoveAsGhost();
         bool isDead();
-        void kill();
+        void Kill();
     protected:
         float x=0,y=0,left=0,right=0,up=0,down=0;
         Vector2f speed;

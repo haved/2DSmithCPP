@@ -41,7 +41,7 @@ void PlayerEntity::Update(Scene* s)
     if(!accel.IsNull())
     {
         accel.Normalize();
-        accel.Multiply(SPEED*Time::getDelta());
+        accel.Multiply(SPEED);
 
         speed.xy(accel.x, accel.y);
     }
@@ -53,8 +53,7 @@ void PlayerEntity::Update(Scene* s)
         speed.Multiply(l);
     }
 
-    x+=speed.x;
-    y+=speed.y;
+    MoveAsGhost();
 }
 
 void PlayerEntity::Render(Scene* s)
