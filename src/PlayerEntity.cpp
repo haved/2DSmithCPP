@@ -5,17 +5,28 @@
 #include <iostream>
 #include <GL/gl.h>
 
-#define SPEED 800
+#define SPEED 1500
 #define FRICTION 8
 
-PlayerEntity::PlayerEntity(float x, float y, float left, float right, float up, float down)
+#define DOWN 0
+#define RIGHT 2
+#define LEFT 1
+#define UP 3
+
+#define ANIM_FRAME_AMOUNT 3
+#define SUB_ANIM_FRAM_MAX 1500
+int direction = 0;
+int animFrame = 0;
+float subAnimFrame = 0;
+PlayerEntity::PlayerEntity(float x, float y, float width, float height, std::shared_ptr<Texture> texture)
 {
     this->x = x;
     this->y = y;
-    this->up = up;
-    this->down = down;
-    this->left = left;
-    this->right = right;
+    this->up = height/2;
+    this->down = up;
+    this->left = width/2;
+    this->right = left;
+    this->texture = texture;
 }
 
 PlayerEntity::~PlayerEntity()
@@ -49,9 +60,37 @@ void PlayerEntity::Update(Scene* s)
     if(!speed.IsNull())
     {
         float l = speed.GetLength();
-        l -= l * FRICTION * Time::getDelta();
+        l -= l * (accel.IsNull() ? 2 : 1) *FRICTION * Time::getDelta();
         speed.Normalize();
         speed.Multiply(l);
+
+        subAnimFrame += l;
+        while(subAnimFrame > SUB_ANIM_FRAM_MAX)
+        {
+            subAnimFrame -= SUB_ANIM_FRAM_MAX;
+            animFrame++;
+        }
+        while(animFrame > ANIM_FRAME_AMOUNT)
+            animFrame -= ANIM_FRAME_AMOUNT;
+
+        if(speed.y > 0.4f)
+        {
+            if(speed.y > speed.x)
+                {direction = DOWN;}
+            else
+                {direction = RIGHT;}
+        }
+        else if(speed.y < -0.4f)
+        {
+            if(speed.y < speed.x)
+                {direction = UP;}
+            else
+                {direction = LEFT;}
+        }
+        else
+        {
+            direction = (speed.x > 0 ? RIGHT : LEFT);
+        }
     }
 
     MoveAsSolid(s);
@@ -59,13 +98,8 @@ void PlayerEntity::Update(Scene* s)
 
 void PlayerEntity::Render(Scene* s)
 {
-    RenderHelper::DisableTextures();
-    glBegin(GL_TRIANGLES);
-    glColor3f(1, 0.3f, 0.6f);
-    glVertex2f(x, y-up);
-    glColor3f(0.6f, 1, 0.3f);
-    glVertex2f(x-left, y+down);
-    glColor3f(0.3f, 0.6f, 1);
-    glVertex2f(x+right, y+down);
-    glEnd();
+    RenderHelper::ResetColor();
+    float x1 = ((int)animFrame)/(float)ANIM_FRAME_AMOUNT;
+    float y1 = direction / 4.0f;
+    RenderHelper::FillRectangleWithTexture(x-left, y-up, x+right, y+down, x1, y1, x1+1.0f/ANIM_FRAME_AMOUNT, y1+1.0f/4, texture.get());
 }

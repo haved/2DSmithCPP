@@ -1,9 +1,13 @@
 #include "RenderHelper.h"
 #include <GL/gl.h>
 
+bool colorReset = false;
 void RenderHelper::ResetColor()
 {
+    if(colorReset)
+        return;
     glColor3f(1.0f,1.0f,1.0f);
+    colorReset = true;
 }
 
 void RenderHelper::FillRectangleWithTexture(float x, float y, float x2, float y2, float texX1, float texY1, float texX2, float texY2, Texture* t)

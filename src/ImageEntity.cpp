@@ -22,5 +22,5 @@ ImageEntity::~ImageEntity(){}
 void ImageEntity::Render(Scene* s)
 {
     RenderHelper::ResetColor();
-    RenderHelper::FillRectangleWithTexture(x, y, x+right, y+down, texX, texY, texX2, texY2, texture.get());
+    RenderHelper::FillRectangleWithTexture(x-left, y-up, x+right, y+down, texX, texY, texX2, texY2, texture.get());
 }
