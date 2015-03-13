@@ -32,7 +32,7 @@ PlayerEntity::PlayerEntity(float x, float y, float width, float height, std::sha
 
 PlayerEntity::~PlayerEntity()
 {
-    std::cout << "PlayerEntity was destructed" << std::endl;
+    std::cout << "PlayerEntity is beeing destructed" << std::endl;
 }
 
 Vector2f accel;
@@ -91,4 +91,9 @@ void PlayerEntity::Render(Scene* s)
     float x1 = ((int)animFrame)/(float)ANIM_FRAME_AMOUNT;
     float y1 = direction / 4.0f;
     RenderHelper::FillRectangleWithTexture(x-left-4, y-up, x+right+4, y+down, x1, y1, x1+1.0f/ANIM_FRAME_AMOUNT, y1+1.0f/4, texture.get());
+}
+
+bool PlayerEntity::isSolid()
+{
+    return true;
 }

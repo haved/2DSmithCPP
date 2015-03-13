@@ -22,3 +22,8 @@ void InteractiveEntity::Render(Scene* s)
     RenderHelper::ResetColor();
     RenderHelper::FillRectangleWithTexture(x-left, y-up, x+right, y+down, texture.get());
 }
+
+bool InteractiveEntity::isSolid()
+{
+    return true;
+}
