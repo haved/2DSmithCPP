@@ -21,6 +21,7 @@
 *.exe
 *.out
 *.app
+bin/
 # Codeblocks project files
 *.cbp
 *.depend
