@@ -27,6 +27,9 @@ class Entity
         void MoveAsGhost();
         virtual void MoveAsSolid(Scene* s);
     private:
+    public:
+        float getX() {return x;}
+        float getY() {return y;}
 };
 
 #endif // ENTITY_H

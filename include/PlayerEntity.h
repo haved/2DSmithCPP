@@ -13,6 +13,8 @@ class PlayerEntity : public Entity
         void Update(Scene* s) override;
         void Render(Scene* s) override;
         bool isSolid() override;
+        float getCameraPanX();
+        float getCameraPanY();
     protected:
     private:
         std::shared_ptr<Texture> texture;

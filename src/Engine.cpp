@@ -6,8 +6,6 @@
 
 #define MIN_TICK_MILLIS 0
 
-float c_width, c_height;
-
 Engine::Engine(int canvas_width, int canvas_height)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -62,4 +60,15 @@ void Engine::PollEvents()
                 break;
             default: break;
         }
+}
+
+float Engine::getCanvasWidth()
+{
+    return c_width;
+}
+
+
+float Engine::getCanvasHeight()
+{
+    return c_height;
 }

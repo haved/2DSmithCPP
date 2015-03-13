@@ -10,7 +10,7 @@
 class Scene
 {
     public:
-        Scene();
+        Scene(float width, float height);
         virtual ~Scene();
         void AddEntity(std::shared_ptr<Entity> e);
         void Update();
@@ -23,6 +23,10 @@ class Scene
     private:
         std::string state;
         std::vector<std::shared_ptr<Entity>> entityList;
+        float width, height;
+    public:
+        float getWidth() {return width;}
+        float getHeight() {return height;}
 };
 
 #endif // SCENE_H

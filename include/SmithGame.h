@@ -9,7 +9,7 @@
 class SmithGame : public Game
 {
     public:
-        SmithGame();
+        SmithGame(Engine* engine);
         virtual ~SmithGame() override;
         void Update() override;
         void Render() override;

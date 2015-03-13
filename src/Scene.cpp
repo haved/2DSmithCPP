@@ -1,9 +1,10 @@
 #include "Scene.h"
 #include <iostream>
 
-Scene::Scene()
+Scene::Scene(float width, float height)
 {
-
+    this->width = width;
+    this->height = height;
 }
 
 Scene::~Scene()
