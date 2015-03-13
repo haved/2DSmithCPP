@@ -3,6 +3,8 @@
 
 #include "Game.h"
 #include "Scene.h"
+#include <memory>
+#include "PlayerEntity.h"
 
 class SmithGame : public Game
 {
@@ -14,6 +16,7 @@ class SmithGame : public Game
     protected:
     private:
         Scene* currentScene;
+        std::shared_ptr<PlayerEntity> player;
 };
 
 #endif // SMITHGAME_H

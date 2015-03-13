@@ -22,18 +22,3 @@ void InteractiveEntity::Render(Scene* s)
     RenderHelper::ResetColor();
     RenderHelper::FillRectangleWithTexture(x-left, y-up, x+right, y+down, texture.get());
 }
-
-Collider* InteractiveEntity::GetCollider()
-{
-    return this;
-}
-
-float InteractiveEntity::getX1() {return x-left;}
-
-float InteractiveEntity::getX2() {return x+right;}
-
-float InteractiveEntity::getY1() {return y-up;}
-
-float InteractiveEntity::getY2() {return y+down;}
-
-bool InteractiveEntity::isSolid() {return true;}

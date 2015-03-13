@@ -1,11 +1,11 @@
 #ifndef PLAYERENTITY_H
 #define PLAYERENTITY_H
 
-#include "Entity.h"
+#include "ColliderEntity.h"
 #include "Texture.h"
 #include <memory>
 
-class PlayerEntity : public Entity
+class PlayerEntity : public ColliderEntity
 {
     public:
         PlayerEntity(float x, float y, float width, float height, std::shared_ptr<Texture> texture);

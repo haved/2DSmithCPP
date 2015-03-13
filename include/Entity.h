@@ -21,7 +21,7 @@ class Entity
         bool dead = false;
 
         void MoveAsGhost();
-        void MoveAsSolid(Scene* s);
+        virtual void MoveAsSolid(Scene* s);
     private:
 };
 
