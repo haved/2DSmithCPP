@@ -26,6 +26,22 @@ void RenderHelper::FillRectangleWithTexture(float x, float y, float x2, float y2
     glEnd();
 }
 
+void RenderHelper::FillRectangleWithTexture(float x, float y, float x2, float y2, float texX1, float texY1, float texX2, float texY2, Texture* t, float z)
+{
+    t->Bind();
+    EnableTextures();
+    glBegin(GL_QUADS);
+    glTexCoord2f(texX1, texY1);
+    glVertex3f(x, y, z);
+    glTexCoord2f(texX1, texY2);
+    glVertex3f(x, y2, z);
+    glTexCoord2f(texX2, texY2);
+    glVertex3f(x2, y2, z);
+    glTexCoord2f(texX2, texY1);
+    glVertex3f(x2, y, z);
+    glEnd();
+}
+
 void RenderHelper::FillRectangleWithTexture(float x, float y, float x2, float y2, Texture* t)
 {
     t->Bind();
@@ -39,6 +55,22 @@ void RenderHelper::FillRectangleWithTexture(float x, float y, float x2, float y2
     glVertex2f(x2, y2);
     glTexCoord2f(1, 0);
     glVertex2f(x2, y);
+    glEnd();
+}
+
+void RenderHelper::FillRectangleWithTexture(float x, float y, float x2, float y2, Texture* t, float z)
+{
+    t->Bind();
+    EnableTextures();
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(x, y, z);
+    glTexCoord2f(0, 1);
+    glVertex3f(x, y2, z);
+    glTexCoord2f(1, 1);
+    glVertex3f(x2, y2, z);
+    glTexCoord2f(1, 0);
+    glVertex3f(x2, y, z);
     glEnd();
 }
 

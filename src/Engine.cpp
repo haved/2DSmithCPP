@@ -16,7 +16,9 @@ Engine::Engine(int canvas_width, int canvas_height)
     std::string title = "Smith";
     display = new Display(canvas_width, canvas_height, title.c_str());
 
-    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
+    glAlphaFunc(GL_GREATER, 0.5);
+    glEnable(GL_ALPHA_TEST);
     glEnable(GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_CULL_FACE);
