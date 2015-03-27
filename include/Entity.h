@@ -1,7 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "Vector2f.h"
-#include "Collider.h"
 
 class Scene;
 
@@ -12,17 +11,25 @@ class Entity
         virtual ~Entity();
         virtual void Update(Scene* s);
         virtual void Render(Scene* s);
-        virtual Collider* GetCollider();
         bool isDead();
         void Kill();
+
+        virtual float getSolidX1();
+        virtual float getSolidX2();
+        virtual float getSolidY1();
+        virtual float getSolidY2();
+        virtual bool isSolid();
     protected:
         float x=0,y=0,left=0,right=0,up=0,down=0;
         Vector2f speed;
         bool dead = false;
 
         void MoveAsGhost();
-        void MoveAsSolid(Scene* s);
+        virtual void MoveAsSolid(Scene* s);
     private:
+    public:
+        float getX() {return x;}
+        float getY() {return y;}
 };
 
 #endif // ENTITY_H

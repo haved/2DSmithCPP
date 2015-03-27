@@ -12,10 +12,13 @@ class Engine
         Engine(int c_width, int c_height);
         virtual ~Engine();
         void Run(Game* game);
+        float getCanvasWidth();
+        float getCanvasHeight();
     protected:
     private:
         Display* display;
         void PollEvents();
+        float c_width, c_height;
 };
 
 #endif // ENGINE_H

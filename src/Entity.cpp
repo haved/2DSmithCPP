@@ -18,42 +18,47 @@ void Entity::MoveAsGhost()
 
 void Entity::MoveAsSolid(Scene* s)
 {
-    float newX = x + speed.x * Time::getDelta();
-    float newY = y + speed.y * Time::getDelta();
+    float xMove = speed.x * Time::getDelta();
+    float yMove = speed.y * Time::getDelta();
 
     Entity* e;
 
     for(int i = 0; i < s->GetEntityAmount(); i++)
     {
         e = s->GetEntityAt(i);
-        if((e->GetCollider()!=NULL) & (e != this))
+        if(e->isSolid() & (e != this))
         {
-            if((newX+right > e->GetCollider()->getX1()) & (newX+right < e->GetCollider()->getX2())
-             & (y - up < e->GetCollider()->getY2()) & (y + down > e->GetCollider()->getY1()))
-                newX = e->GetCollider()->getX1()-right;
+            if((getSolidX2()+xMove > e->getSolidX1()) & (getSolidX2()+xMove < e->getSolidX2())
+             & (getSolidY1() < e->getSolidY2()) & (getSolidY2() > e->getSolidY1()))
+                xMove = e->getSolidX1()-getSolidX2();
 
-            if((newY+down > e->GetCollider()->getY1()) & (newY+down < e->GetCollider()->getY2())
-             & (x - left < e->GetCollider()->getX2()) & (x + right > e->GetCollider()->getX1()))
-                newY = e->GetCollider()->getY1()-down;
+            if((getSolidY2()+yMove > e->getSolidY1()) & (getSolidY2()+yMove < e->getSolidY2())
+             & (getSolidX1() < e->getSolidX2()) & (getSolidX2() > e->getSolidX1()))
+                yMove = e->getSolidY1()-getSolidY2();
 
-            if((newX-left < e->GetCollider()->getX2()) & (newX-left > e->GetCollider()->getX1())
-             & (y - up < e->GetCollider()->getY2()) & (y + down > e->GetCollider()->getY1()))
-                newX = e->GetCollider()->getX2()+left;
+            if((getSolidX1()+xMove < e->getSolidX2()) & (getSolidX1()+xMove > e->getSolidX1())
+             & (getSolidY1() < e->getSolidY2()) & (getSolidY2() > e->getSolidY1()))
+                xMove = e->getSolidX2()-getSolidX1();
 
-            if((newY-up < e->GetCollider()->getY2()) & (newY-up > e->GetCollider()->getY1())
-             & (x - left < e->GetCollider()->getX2()) & (x + right > e->GetCollider()->getX1()))
-                newY = e->GetCollider()->getY2()+up;
+            if((getSolidY1()+yMove < e->getSolidY2()) & (getSolidY1()+yMove > e->getSolidY1())
+             & (getSolidX1() < e->getSolidX2()) & (getSolidX2() > e->getSolidX1()))
+                yMove = e->getSolidY2()-getSolidY1();
         }
     }
 
-    x = newX;
-    y = newY;
+    x += xMove;
+    y += yMove;
 }
 
-Collider* Entity::GetCollider()
-{
-    return NULL;
-}
+float Entity::getSolidX1() {return x-left;}
+
+float Entity::getSolidX2() {return x+right;}
+
+float Entity::getSolidY1() {return y-up;}
+
+float Entity::getSolidY2() {return y+down;}
+
+bool Entity::isSolid() {return false;}
 
 void Entity::Kill()
 {
